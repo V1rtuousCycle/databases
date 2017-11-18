@@ -1,15 +1,47 @@
 var models = require('../models');
 
+var db = require('../db');
+
+var userFields = ['username'];
+var messageFields = ['message', 'username', 'roomname'];
+
 module.exports = {
   messages: {
-    get: function (req, res) {}, // a function which handles a get request for all messages
-    post: function (req, res) {} // a function which handles posting a message to the database
+    get: function(req, res) {
+      // db.Message.findAll({ include: [User] })
+      // .complete(function(err, results) {
+      //   res.json(results);
+      // });
+    },
+    post: function(req, res) {
+      //  db.User.findOrCreate({username: req.body[username]})
+      //    .complete(function(err, user) {
+      //      var params = {
+      //        text: req.body[text],
+      //        userid: user.id,
+      //        roomname: req.body[roomname]
+      //      };
+      //    db.Message.create(params)
+      //      .complete(function(err, results) {
+      //        res.sendStatus(201);
+      //      });
+      //    });
+      // }
+    },
   },
-
   users: {
-    // Ditto as above
-    get: function (req, res) {},
-    post: function (req, res) {}
+    get: function(req, res) {
+      db.User.findAll()
+        .complete(function(err, results) {
+          res.json(results);
+        });
+    },
+    post: function(req, res) {
+    //   db.User.create({username: req.body[username]})
+    //     .complete(function(err, user){
+    //       res.sendStatus(201);
+    //     });
+    //   }
+    },
   }
 };
-
